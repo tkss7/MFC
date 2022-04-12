@@ -1,4 +1,5 @@
-#include "Library.h"
+//#include "Library.h"
+#include<iostream>
 #include <vector>
 
 using namespace std;
@@ -185,140 +186,134 @@ int MyCalc(Calc& obj, const int a, const int b) {
     return obj.calc(a, b);
 }
 
-int main(int argc, char** argv)
+
+bool InitInstance(Zoo* pZoo)
 {
-    int a = 10; //atoi(argv[1]);
-    int b = 20; //atoi(argv[2]);
-    int c = 10;
-    int d = 20;
-    int e = 10;
-    int f = 20;
-    int sum;
-
-    
-
-    //컴파일 타임 
-    //런타임 
-//    sum = a + b; //정적인 코드 -> sum = 10 + 20;
-    //debug -> 함수로 정상 동작함 : runtime시 계산함 , 디버깅 정보가 결과물 안에 포함됨 
-    //release -> 최적화로 정적코드로 동작함 sum = 30
-    //생성(exe 만들기)  : 일반적인 경우 debug 모드가 exe 생성시 좀더 빠르다
-    //실행 : 일반적을 release 모드의 결과물이 빠르다 
-    //크기 : debug 모드가 크다, release 모드가 보통 debug 모드 대비 1/4 정도 작다 
-    //일반화 / 특별화 
-    //pointer -> data pointer, function pointer
-    int* p1 = &a;
-    int* p2 = &b;
-
-    sum = 10 + 20;
-
-    sum = a + b;
-    sum = c + d;
-    sum = e + f;
-    
-    p1 = &a;
-    p2 = &b;
-    sum = *p1 + *p2;
-
-    p1 = &c;
-    p2 = &d;
-    sum = *p1 + *p2;
-
-    p1 = &e;
-    p2 = &f;
-    sum = *p1 + *p2;
-
-    int result = 0;
-
-    calc = add;
-    result = calc(a, b);
-
-    calc = sub;
-    result = calc(a, b);
-
-    //함수포인터 
-    Calc* pCalc = new AddCalc();
-    result = pCalc->calc(a, b); //a + b;
-    delete pCalc;
-
-    pCalc = new SubCalc();
-    result = pCalc->calc(a, b); //a - b;
-    delete pCalc;
-    
-    AddCalc addCalc;
-    Calc& objA = addCalc;
-    result = objA.calc(a, b); //a + b;
-
-    SubCalc subCalc;
-    Calc& objB = subCalc;
-    result = objB.calc(a, b); //a - b;
-
-    result = MyCalc(addCalc, a, b);
-    result = MyCalc(subCalc, a, b);
-
-    //새롭게 추가된 부분 
-    MulCalc objC;
-    result = MyCalc(objC, a, b);
-
-    vector<Calc*> arr = {&addCalc, &objC, &subCalc};
-    //for (auto& pCalc : arr) {
-    for (int i = 0; i < arr.size();i++) {
-        MyCalc(*arr[i], a, b);
-    }
-    for (auto& pCalc : arr) {
-        MyCalc(*pCalc, a, b);
-    }
-
-    cout << a << " + " << b << " = " << sum << endl;
-
-    Zoo zoo;
     Cat cat;
     Dog dog;
     Cow cow;
 
-    zoo.addAnimal(&dog);
-    zoo.addAnimal(&cat);
-    zoo.addAnimal(&cow);
+    pZoo->addAnimal(&dog);
+    pZoo->addAnimal(&cat);
+    pZoo->addAnimal(&cow);
 
-    zoo.speak();
+}
 
-    //cout << "sum = " << endl;
+bool Run(Zoo* pZoo) {
+    pZoo->speak();
+    return true;
+}
 
-    //const int size = 10;
-    //const int arr[10] = { 1,2,3,4,5,6,7,8,9,10 };
+bool ExitInstance(Zoo* pZoo)
+{
+    return true;
+}
 
-    //cout << "sum = " << sum(arr, size) << endl;
+int main(int argc, char** argv)
+{
+//    int a = 10; //atoi(argv[1]);
+//    int b = 20; //atoi(argv[2]);
+//    int c = 10;
+//    int d = 20;
+//    int e = 10;
+//    int f = 20;
+//    int sum;
+//
+//    
+//
+//    //컴파일 타임 
+//    //런타임 
+////    sum = a + b; //정적인 코드 -> sum = 10 + 20;
+//    //debug -> 함수로 정상 동작함 : runtime시 계산함 , 디버깅 정보가 결과물 안에 포함됨 
+//    //release -> 최적화로 정적코드로 동작함 sum = 30
+//    //생성(exe 만들기)  : 일반적인 경우 debug 모드가 exe 생성시 좀더 빠르다
+//    //실행 : 일반적을 release 모드의 결과물이 빠르다 
+//    //크기 : debug 모드가 크다, release 모드가 보통 debug 모드 대비 1/4 정도 작다 
+//    //일반화 / 특별화 
+//    //pointer -> data pointer, function pointer
+//    int* p1 = &a;
+//    int* p2 = &b;
+//
+//    sum = 10 + 20;
+//
+//    sum = a + b;
+//    sum = c + d;
+//    sum = e + f;
+//    
+//    p1 = &a;
+//    p2 = &b;
+//    sum = *p1 + *p2;
+//
+//    p1 = &c;
+//    p2 = &d;
+//    sum = *p1 + *p2;
+//
+//    p1 = &e;
+//    p2 = &f;
+//    sum = *p1 + *p2;
+//
+//    int result = 0;
+//
+//    calc = add;
+//    result = calc(a, b);
+//
+//    calc = sub;
+//    result = calc(a, b);
+//
+//    //함수포인터 
+//    Calc* pCalc = new AddCalc();
+//    result = pCalc->calc(a, b); //a + b;
+//    delete pCalc;
+//
+//    pCalc = new SubCalc();
+//    result = pCalc->calc(a, b); //a - b;
+//    delete pCalc;
+//    
+//    AddCalc addCalc;
+//    Calc& objA = addCalc;
+//    result = objA.calc(a, b); //a + b;
+//
+//    SubCalc subCalc;
+//    Calc& objB = subCalc;
+//    result = objB.calc(a, b); //a - b;
+//
+//    result = MyCalc(addCalc, a, b);
+//    result = MyCalc(subCalc, a, b);
+//
+//    //새롭게 추가된 부분 
+//    MulCalc objC;
+//    result = MyCalc(objC, a, b);
+//
+//    vector<Calc*> arr = {&addCalc, &objC, &subCalc};
+//    //for (auto& pCalc : arr) {
+//    for (int i = 0; i < arr.size();i++) {
+//        MyCalc(*arr[i], a, b);
+//    }
+//    for (auto& pCalc : arr) {
+//        MyCalc(*pCalc, a, b);
+//    }
+//
+//    cout << a << " + " << b << " = " << sum << endl;
+//
+//    Zoo zoo;
+//    Cat cat;
+//    Dog dog;
+//    Cow cow;
+//
+//    zoo.addAnimal(&dog);
+//    zoo.addAnimal(&cat);
+//    zoo.addAnimal(&cow);
+//
+//    zoo.speak();
 
-    //int choice, stop = 1;
-    //SystemHandler lib;
+    Zoo zoo;
 
-    //lib.load_Member();
+    InitInstance(&zoo);
 
-    //while (stop)
-    //{
-    //    cout << "\n─────────────────[Book System Start]─────────────────\n";
-    //    cout << "\t[1. 로그인]\t[2. 회원가입]\t[3. 프로그램 종료]\t\n";
-    //    cout << "\tSelect ? (1~3) >> ";
-    //    cin >> choice;
-    //    
+    Run(&zoo);
 
-    //    cin.ignore(1);
+    ExitInstance(&zoo);
 
-    //    switch (choice)
-    //    {
-    //    case 1: lib.Login();
-    //        break;
-    //    case 2: lib.Add_Member();
-    //        break;
-    //    case 3: stop = 0;
-    //        cout << "\n────────────────[Book System End]───────────────────\n";
-    //        break;
-    //    }
-    //    return 0;
-    //}
-    // 오류 : 1. 구문 오류 : 컴파일러가 잡아줌 (시간이 많이 걸리지 않음)
-    //       2. 논리 오류 : 개발자 디버깅을 통해서 잡는다(시간이 많이 걸림)
-    // read,  read/write 
 
     return 0;
 }

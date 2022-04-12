@@ -1,0 +1,176 @@
+static 객체를 만들지 않고 클래스의 소속된 함수로써 클래스를 통해 함수를 만들수 있다 static
+ -> 이를 통해 factory method 를 
+
+소멸자에 의해 객체의 값이 삭제될 경우 힙에다가 만들어야한다 (new)
+
+■클래스 선언 : 클래스는 선언 후 객체화 해야 사용 할 수 있다.
+
+
+■#ifdef (조건 디파인)
+문자 열에 관해서는 _T로 사용하여 변경 가능
+
+-기존  _wchar   : wchar_t p[]= L"Hello World"; 
+        char      : char p1= "Hello World";
+
+-변경  ex) #ifdef _UNICODE
+	#define TCHAR wchar_t
+	#define _T(str) L(str)
+      #else
+	#define TCHAR char
+	#define _T(str) str
+      #end
+      
+
+===========================================================================================
+■세팅
+ 속성페이지 -> 구성(좌 상단 위치) : 모든구성으로 변경 -> 구성 속성의 고급에서 mfc사용을 공유 dll에서 mfc사용으로변경
+ -> 링커의 시스템에서 창으로 변경
+
+■CwinApp 응용 프로그램을 담당하는 클래스(윈도우 응용프로그램을 클래스로 사용하는 경우) 
+   -> c++의 main을 담당함, 열림닫힘의 원칙을 이용(우리가 만드는것은 기능추가이다)
+  => 응용프로그램을 만들때는 CWinApp으로 부터 상속을 받는다
+
+■CwinApp(윈도우프로그램의 클래스) : MFC는 시작과 종료가 나뉘어져 약속되어 있다.
+ 진입점(시작함수) : class CMyApp : public CWinApp{
+		public:
+		virtual BOOL InitInstance() override{
+		return TRUE;
+		}
+		virtual int ExitInstance() override{
+		return 0;
+		}
+		};
+
+
+■윈도우의 표준입력 : 윈도우를 기준으로 동작하기 때문에 콘솔창의 표준입력장치로 결과를 볼수 없다.
+  ① TRACE : TRACE("hello world\/"); 디버깅시에만 동작되어 보인다
+  ② AfxMessageBox(MFC 함수) : AfxMessageBox(_T("hello world"));  => _T꼭 써라 안그러면 될때있고 안될때 잇다    
+  ③ ::MessageBox(NULL, _T("내용"), _T("title"),MB_OK);            //Win32API -> template
+	- ::MessageBoxW(); 			      //Win32API -> unicode
+	- ::MessageBoxA();  			     //Win32API -> ansi code
+     =>   #ifdef UNICODE  (조건 디파인으로 MessageBox로 통일)
+	#define MessageBox  MessageBoxW
+	#else
+	#define MessageBox  MessageBoxA
+	#endif // !UNICODE
+  ④참고
+	- LPSTR (L=long  P=pointer  STR=string)  ->  char* str = char str[]  
+	- LPWSTR (L=long  P=pointer  W=wide  STR=string)   ->  wchar* wstr = wchar str[]|  
+	- LPCWSTR (L=long  P=pointer  C=const  W=wide  STR=string)  ->  const wchar* wstr; 
+	- LPCTSTR  -> const char*, const wchar_t*
+	- LPTSTR -> char*, wchar_t*
+
+
+
+■프레임 윈도우 생성(CFrameWnd)
+  1. CFrameWnd - 프레임 윈도우  -> 프레임윈도우를 책임지고 담당
+     ① 윈도우 제목(resource), 메뉴(resource), 아이콘(resource) + 안쪽에 윈도우에 자식 윈도우를 생성하고 관리 할수 있는 책임
+     ② 도구와 상태바를 생성해서 관리 할 수 있다
+  
+  2. 생성방법
+     ① CWnd::Create()  //핵심
+	virtual BOOL InitInstance() override {
+		
+			CMainFrame* pMainFrame = new CMainFrame(); 	//힙에 저장하지 않으면 소멸자에 의해 삭제되기때문에 new
+			pMainFrame->Create(NULL, NULL);			 //mfc내에서 디폴트 값으로 결정되어 있어 null값만 전달
+			//::CreateWindow  -> Create(NULL, NULL)
+			pMainFrame->ShowWindow(SW_SHOW);  		//화면에 윈도우 표시해줘
+			m_pMainWnd = pMainFrame; 			 //CWinApp 뭐라는데 넌 뭐니 메인윈도우 설정이래
+		
+		return TRUE;
+	}
+
+     ② LoadFrame()
+	순서 : 리소스파일 생성 -> stringtable -> menu, icon
+	main.cpp :  #include "resource.h"  -> 리소스파일 불러오기
+		  pMainFrame->LoadFrame(IDR_MAIN_FRAME);  -> 리소스 파일 로드
+
+     ③ RuntimeClass 사용(Document / View)
+
+
+   3. resource
+	①윈도우제목 ②메뉴 ③아이콘 
+	: 위의 3가지를 사용하여 윈도우를 생성하기 위해서는 LoadFrame()을 사용해서 FrameWnd생성
+
+프로그램하고 상관없이 사용할수 있는 데이터등을 외부 파일로 빼서 사용 필요 할때 사용하게 하는것
+
+
+■객체 생성방법
+          ▶원시적인 객체 생성방법 - 속도가 빠르고 쉽지만 관리가 어렵다
+	① A obj;
+		A obj();  -> 함수선언이 되어 혼란이 생긴다
+		A obj{};
+	② A* pobj = new A();
+	    A* pobj = new A;
+	    A* pobj = new A{};
+
+          ▶mfc의 객체 생성방법 (factory desgin method 에 대한 매크로)
+		DECLARE_DYNAMIC(A);
+		DECLARE_DYNCREATE(A);   
+			객체 생성의 일반화 제공 : CRuntimeClass::CreateObject()
+		DECLARE_SERIAL(A);  
+ 			객체 생성의 일반화 제공 : CRuntimeClass::CreateObject(), CObject::Serialize() : 저장소에저장하고 읽는 기능 제공, 호출할수 있따
+
+
+		IMPLEMENT_DYNAMIC(A, CObject);    :  부모자식 관계의 연결고리 생성
+		IMPLEMENT_DYNCREATE(A, CObject);  : 부모자식 관계의 연결고리 생성, 객체생성의 일반화 제공
+		IMPLEMENT_SERIAL(A, CObject,1);      :  부모자식 관계의 연결고리 생성, 객체생성의 일반화 제공, 읽기 쓰기에 대한 기능 제공
+
+
+
+
+runtime_class 얘 하면 이걸 가지고 뭘 해라 라고 얘끼하는거
+
+RTTI - c++에서는 안되는것을 mfc에서는 구현할수있는 매크로를 사용
+
+
+
+
+mfc 에서는 CObject() 가장 높은 조상
+
+
+
+Document/View
+mvc - model(document) veiw controller(제어)
+
+Document - 데이터 관릭가 목적 ( 새문서, 열기, 저장 )
+View - 화면 출력 
+
+Doc/View 구조
+Document/View 구조
+단일문서 - CSingleDocTemplate* pDocTemplate;
+	pDocTemplate = new CSingleDocTemplate(IDR_MAIN_FRAME,
+	RUNTIME_CLASS(CMyDoc),
+	RUNTIME_CLASS(CMyDoc),
+	RUNTIME_CLASS(CMyDoc),
+다중문서 - 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

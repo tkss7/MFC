@@ -1,0 +1,195 @@
+마성일 강사님
+masungil2@다음
+
+
+
+
+
+20220411 
+=====================================================================================
+■오류 
+	1. 구문오류 - 컴파일러(시간 조금)
+	2. 논리 오류 - 개발자가 디버깅을 통해서 잡는다(시간 많이)
+read write(변경) 의 구분을 확실히 하자
+읽기는 const / #define  보다는 const를 쓰자
+
+
+
+
+
+■const
+ 	: 바로 다음에(뒤에) 나오는 기호만 상수로 만든다.(data type 제외) -> 논리오류를 구문오류로 만들기위해 사용
+ex) const int* const arr   -> const를 두번해야 *(내용 값)와 arr(주소 및 지시) 둘다 상수화됨
+
+class Animal {
+public:
+	virtual void speak() const = 0; //-> 0은 추상클래스화, const는 이 함수 안에서의 값은 읽기만 하겠다는 의미
+};
+class Cat : public Animal {
+public:
+	virtual void speak() const override { cout << "야용" << endl; }
+};
+class Dog: public Animal {
+public:
+	virtual void speak() const override { cout << "멍멍" << endl; }
+};
+class Zoo {
+private:
+	vector<Animal*> array;//->직접 변수명 선언이 아닌 벡터를 이용하여 관리한다
+public:
+	void addAnimal(Animal* const pAnimal) {
+		//->포인터 변수를 이용해서 포인터를 변경하면 컴파일오류 발생하도록 설정
+		array.push_back(pAnimal);
+	}
+	void speak() {
+		for (const auto& pAnimal : array) {
+			//->읽기 전용으로 쓰겠다
+			pAnimal->speak();
+		}
+	}
+};
+bool InitInstance(Zoo* pZoo) {  //-> 추가 변경시 이 부분을 추가수정하면된다, 이를 virtual func로 인지
+	Cat cat;
+	Dog dog;
+
+	pZoo->addAnimal(&dog);
+	pZoo->addAnimal(&cat);
+
+	return true;
+}
+bool Run(Zoo* pZoo) {     //-> 이를 virtual func로 인지
+	pZoo->speak();
+	return true;
+}
+bool ExitInstance(Zoo* pZoo) {  	//-> 이를 virtual func로 인지
+	return true;
+}
+int main() {
+	Zoo zoo;
+	InitInstance(&zoo); //메인이라는 함수에서 동작하도록 사전에 규정함
+			//이러한 작업 공간을 사전에 약속해놓은것을 프레임워크라고 한다.
+	Run(&zoo);
+	ExitInstance(&zoo);
+	return 0;
+}
+===> 이에 우리는 함수를 재정의하여 기능을 추가할뿐 메인은 건들이지 않는다.
+▶기존 libaraty 의 사용 + 나의 기능 추가(main()의 작성 주체는 개발자 자신, 프레임 워크를 이해필요) -> 프로그램 응용작성(함수를 재정의하여 기능을 추가만 한다, main은 작성하지 않는다)
+▶ pointer -> indirect -> virtual function, 의존성 역전, ocp(열림닫힘의 규칙/ 변경없이 기능만 추가) --> 이것이 다 되면 framework
+
+
+
+
+■interface
+virtual 가상함수는 다형성을 통해 오버라이딩을 해서 부모나 포인트 변수를 가지고 자식의 특별한 기능을 호출하는것
+일반화 특별화
+
+-solid의 개념- 
+   1. 단일책임의 원칙 
+	- 클래스를 만들때 하나의 일만 하게끔 만들어야 한다 
+	- 혼란이나 버그가 생길 수 있음(기존 코드는 수정을 하지 않고 새로운 기능을 받아들일수 잇어야 함)
+   2. 열림 닫힘의 원칙 
+	- 확장을 할때 기존의 코드는 가만히 두고 새로운 코드에 대한 확장으로 사용해야 한다. 
+   3. 리스코프 치환이 원칙 : 뜬금없는 클래스로 치환할수 없다. 연관있는 자식클래스는 가능함
+   4. 인터페이스 분리 원칙 : 인터페이스를 너무 크게 잡지 마라 만약 수륙양용자동차를 만드려면 자동차 인터페이스, 보트 인터페이스를 각각 만들어
+			이중으로  상속받게 하는게 낫다.
+   5. 의존성 역전 원칙
+	- 직접적인 객체가 포함되어 확장성이 상실되고 지속적으로 변경되지 않고 
+	중간에 추상클래스 혹은 인터페이스를 두고 이를 상속받는다. 이에 부모의 참조 변수만 관리하게 한다.
+
+	
+
+
+
+
+■일반화
+	: 포인터를 가지고 변수명에 대한 종속성을 해제 하는것이 일반화이다.(pointer, indirect, 제네릭)
+	 런타임시(간접적으로) 동작  -> 포인터를 쓰면 주소 써서 그냥 무조건 일반화라고 생각해라
+
+■pointer - 특별한 변수명에 대한 종속성을 해제하고 일반화하기 위함이다
+ 	&a -> void*, int* 를 나타낸다,  void형 포인터는 해당주소에서 원하는만큼 읽어라가 된다 
+				   읽는대로 형변환 할 수 있기에 범용성이 넓고 void 포인터에 대해 일반화라고 한다
+
+■함수포인터 선언 방법
+int sum(const int a, const int b) -> int (*sum)(const int a, const int b)
+
+
+■typedef  - 타입 재정의 한다 -> 변수명을 새로운 타입으로 정의하는것이 된다
+	: typedef oldtype newtype -> type unsigned int UINT;  //기존
+	: typedef int (*FP_CALC)(const int a, const int b);  //변수명을 새로운 타입의 함수포인터로 정의
+              FP_CALC calc;     //함수포인터 선언  -> 이를 이용하여 일반화를 통해 열림 닫힘의 원칙 사용
+
+
+■debug -> 함수로 정상작동함, 런타임시 계산
+	: 프로그램 코드상 최적화가 안되어 있다(디버깅 정보가 결과물 안에 포함됨, 개발할때 사용)
+■release -> 최적화로 정적코드로 동작함 sum = 30
+	:  디버깅 정보가 제외된 최적화된 크기와 빠른 실행으로 배포할때 사용
+■debug와  release의 비교
+   생성(exe 만들기) : 일반적인 경우 debug 모드가 exe생성시 좀더 빠르다
+   실행 : 일반적으로 release 모드의 결과물이 빠르다
+   크기 : debug모드가 크다, release 모드가 debug 모드 대비 1/4 정도 작다
+
+
+■정적인 코드
+ ex) 컴파일시 값을 확정지어 답이 나오는 것 
+■동적인 코드
+ ex) 값을 입력 받아서 런타임시 계산하여 결과가 도출되는것
+
+
+■컴파일타임 - 이때 결정되는거 많다, 정적인 코드는 컴파일 타임에서 결정된다 ex) sum= 10+20; 이런거
+■런타임 - 실행타임에 결정되는 것
+
+폭 넓게 작업시 char를 사용하는 것이 좋다 개발자가 가공하면 되기 때문에!
+int 로만 받을시 문자열은 아예 받지 못하기 때문에 char로 받는다
+
+프로젝트 환경설정에 디버깅에 명령인수에 값을 입력하면 프로그램 안에서 값을 받아서 실행 할 수 있다
+
+
+atio - 문자열이 정수라면 정수로 바꿔준다
+
+
+■auto for문
+	변경전 -> for (int i = 0; i < arr.size(); i++){
+ 	    MyCalc(*arr[i],a,b);
+	     }
+	변경후 ->for (auto& pCalc : arr){
+ 	    MyCalc(*pCalc,a,b);
+	    }
+
+====================================================================
+Windows Programing API(Application  Programing Interface) 32 윈도우 프로그램을 작성하기 위한 규칙
+
+-MFC-
+   : Win32 API    (c언어를 사용하여 윈도우프로그램을 작성하는 라이브러리)
+          + 
+        MFC        (Win32 API를 클래스화한 라이브러리)
+
+■typedef void* HANDLE - 오프젝트를 구분하는 고유번호(주소) 
+
+HINSTANCE;
+HWND ; :  도구 창 등등을 얘기함
+_wchar   : 2byte짜리 유니코드, wchar_t str2 = L"aaa";
+char      : 1byte짜리 아스키코드, window 3.1 -> 16bit ascii code  => char* str = "aaa"; 아스키 캐릭터
+
+
+■콘솔프로그램
+	진입점 : main() -> framework 이용시 수정하거나 작성하지 않는다
+	콘솔출력: c++ -> cout, c -> printf  : 표준 출력장치
+	키보드 입력 : c++ -> cin, c-> scanf, gets(), getchar(),..... :  표준 입력장치
+	실행 루틴 : 순차적으로 처리됨
+
+■윈도우프로그램(Win32 API) ->c style 작성
+	진입점 : WinMain()  -> 이것은 수정하거나 작성하지 않는다, 필요한 기능사용시 virtual func를 이용하여 재정의 하고 추가한다
+	출력 : 윈도우에 출력
+	입력 :마우스, 키보드로 직접입력
+	프로그램 흐름에 대한 규칙이 약속되어 있다
+	순차적으로 동작하지 않는다
+	메시지를 통한 동작으로 수행된다
+
+-mfc앱 프로젝트 생성시-
+■어플리케이션종류
+   단일문서 - 하나의 탭, 메뉴존재 ( ex-그림판 등) 
+   대화상자 기반 - 메뉴 없이 뜨는 단일창( ex-계산기 등)
+   여러문서 - 여러개의 탭이고 메뉴가 존재( ex-비쥬얼스튜디오 등)
+   여러 최상위 문서 - ex) 워드프로그램
+
+
