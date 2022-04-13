@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FrameRgn", "FrameRgn\FrameRgn.vcproj", "{F35E8745-0640-4EFF-8F2C-113D64F6BB00}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F35E8745-0640-4EFF-8F2C-113D64F6BB00}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F35E8745-0640-4EFF-8F2C-113D64F6BB00}.Debug|Win32.Build.0 = Debug|Win32
+		{F35E8745-0640-4EFF-8F2C-113D64F6BB00}.Release|Win32.ActiveCfg = Release|Win32
+		{F35E8745-0640-4EFF-8F2C-113D64F6BB00}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

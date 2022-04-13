@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SerializeDemo", "SerializeDemo\SerializeDemo.vcproj", "{983E903D-83DF-4C2C-A48F-1F31763EEEEC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{983E903D-83DF-4C2C-A48F-1F31763EEEEC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{983E903D-83DF-4C2C-A48F-1F31763EEEEC}.Debug|Win32.Build.0 = Debug|Win32
+		{983E903D-83DF-4C2C-A48F-1F31763EEEEC}.Release|Win32.ActiveCfg = Release|Win32
+		{983E903D-83DF-4C2C-A48F-1F31763EEEEC}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

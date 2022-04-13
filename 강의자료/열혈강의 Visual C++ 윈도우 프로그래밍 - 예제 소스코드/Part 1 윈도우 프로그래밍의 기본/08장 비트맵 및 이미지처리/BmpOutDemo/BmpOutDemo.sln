@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BmpOutDemo", "BmpOutDemo\BmpOutDemo.vcproj", "{E1081F21-1A19-48AD-AFF3-5CCDC8EAB10D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E1081F21-1A19-48AD-AFF3-5CCDC8EAB10D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E1081F21-1A19-48AD-AFF3-5CCDC8EAB10D}.Debug|Win32.Build.0 = Debug|Win32
+		{E1081F21-1A19-48AD-AFF3-5CCDC8EAB10D}.Release|Win32.ActiveCfg = Release|Win32
+		{E1081F21-1A19-48AD-AFF3-5CCDC8EAB10D}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
