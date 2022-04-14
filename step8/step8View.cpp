@@ -37,7 +37,6 @@ END_MESSAGE_MAP()
 Cstep8View::Cstep8View() noexcept
 {
 	// TODO: 여기에 생성 코드를 추가합니다.
-
 }
 
 Cstep8View::~Cstep8View()
@@ -110,6 +109,7 @@ Cstep8Doc* Cstep8View::GetDocument() const // 디버그되지 않은 버전은 �
 
 void Cstep8View::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) // 컨트롤키 == 플래그를 사용
 {
+	
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 
 	//m_wndChild.MoveWindow(CRect(200, 200, 300, 240));
@@ -125,6 +125,7 @@ void Cstep8View::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) // 컨트롤�
 */
 	if ((nFlags & VK_CONTROL) == VK_CONTROL) {
 		m_wndChild.SetWindowText(_T("Hello World")); // 버튼안의 글자가 바뀜 // 즉 누를때 마다 바뀐다.
+		TRACE("%d called\n", i++);
 	}
 
 	
@@ -151,10 +152,7 @@ void Cstep8View::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) // 컨트롤�
 		case VK_DOWN:
 			pt.y += 10;
 			break;
-		case VK_DOWN& VK_RIGHT:
-			pt.y += 10;
-			pt.x += 10;
-			break;
+
 
 	}
 	ScreenToClient(&pt);

@@ -7,7 +7,7 @@
 #include "SDI_Demo.h"
 #include"SDI_DemoDoc.h"
 #include "MainFrm.h"
-
+#include"SDI_DemoView.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -19,6 +19,9 @@ IMPLEMENT_DYNCREATE(CMainFrame, CFrameWnd)
 BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_WM_CREATE()
 	ON_COMMAND(IDM_VIEW_FRAME__DOC_READ, &CMainFrame::OnViewFrame)
+	ON_COMMAND(IDM_VIEW_FRAME_READ, &CMainFrame::OnViewFrame)
+	ON_COMMAND(IDM_VIEW_APP_READ, &CMainFrame::OnViewFrame)
+	
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -110,4 +113,14 @@ void CMainFrame::OnViewFrame()
 
 	CSDIDemoDoc* pDoc= (CSDIDemoDoc*) GetActiveDocument();
 	TRACE("CMainFrame::OnViewFrameDocRead() c = %d , d = %d\n", pDoc->m_c, pDoc->m_d);
+
+	CSDIDemoView* pView = (CSDIDemoView*)GetActiveView();
+	if (pView != nullptr) {
+		TRACE("CMainFrame::OnCreate() 프레임에서 읽기... g = %d , h = %d\n", pView->m_g, pView->m_h);
+	}
+
+	CSDIDemoApp* pApp = (CSDIDemoApp*)AfxGetApp();
+
+	TRACE("CMainFrame::OnCreate() 앱에서 읽기... g = %d , h = %d\n", pApp->m_a, pApp->m_b);
+
 }

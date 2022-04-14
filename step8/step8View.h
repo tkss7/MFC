@@ -10,7 +10,7 @@ class Cstep8View : public CView
 protected: // serialization에서만 만들어집니다.
 	Cstep8View() noexcept;
 	DECLARE_DYNCREATE(Cstep8View)
-
+	int i=0;
 // 특성입니다.
 public:
 	Cstep8Doc* GetDocument() const;
