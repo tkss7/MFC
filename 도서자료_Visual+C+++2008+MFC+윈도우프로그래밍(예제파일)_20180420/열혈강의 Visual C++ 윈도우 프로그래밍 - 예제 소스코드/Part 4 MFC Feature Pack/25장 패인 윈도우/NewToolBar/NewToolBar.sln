@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NewToolBar", "NewToolBar\NewToolBar.vcproj", "{FC52C317-D4E0-484E-8040-464E8B9B3D50}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FC52C317-D4E0-484E-8040-464E8B9B3D50}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FC52C317-D4E0-484E-8040-464E8B9B3D50}.Debug|Win32.Build.0 = Debug|Win32
+		{FC52C317-D4E0-484E-8040-464E8B9B3D50}.Release|Win32.ActiveCfg = Release|Win32
+		{FC52C317-D4E0-484E-8040-464E8B9B3D50}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

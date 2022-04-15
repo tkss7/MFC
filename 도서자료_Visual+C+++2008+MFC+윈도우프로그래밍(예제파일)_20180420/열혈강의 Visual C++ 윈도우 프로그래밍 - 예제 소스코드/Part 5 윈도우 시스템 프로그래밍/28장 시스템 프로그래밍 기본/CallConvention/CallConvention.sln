@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CallConvention", "CallConvention.vcproj", "{4EC56459-852D-4E5C-A50E-0D2F73EC429E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4EC56459-852D-4E5C-A50E-0D2F73EC429E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4EC56459-852D-4E5C-A50E-0D2F73EC429E}.Debug|Win32.Build.0 = Debug|Win32
+		{4EC56459-852D-4E5C-A50E-0D2F73EC429E}.Release|Win32.ActiveCfg = Release|Win32
+		{4EC56459-852D-4E5C-A50E-0D2F73EC429E}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

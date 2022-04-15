@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32228.343
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextOutDemo", "TextOutDemo\TextOutDemo.vcxproj", "{2C212565-E965-4D8F-85CD-F085D2202786}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2C212565-E965-4D8F-85CD-F085D2202786}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2C212565-E965-4D8F-85CD-F085D2202786}.Debug|Win32.Build.0 = Debug|Win32
+		{2C212565-E965-4D8F-85CD-F085D2202786}.Release|Win32.ActiveCfg = Release|Win32
+		{2C212565-E965-4D8F-85CD-F085D2202786}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C37FEB28-1D38-420C-AAF7-0660EAA1D43C}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32228.343
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TriangleDemo", "TriangleDemo\TriangleDemo.vcxproj", "{88B44A98-DE93-4E39-9A77-E09C84349611}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{88B44A98-DE93-4E39-9A77-E09C84349611}.Debug|Win32.ActiveCfg = Debug|Win32
+		{88B44A98-DE93-4E39-9A77-E09C84349611}.Debug|Win32.Build.0 = Debug|Win32
+		{88B44A98-DE93-4E39-9A77-E09C84349611}.Release|Win32.ActiveCfg = Release|Win32
+		{88B44A98-DE93-4E39-9A77-E09C84349611}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AAEBEC40-A208-4487-B42F-ADD6022B5F06}
+	EndGlobalSection
+EndGlobal
