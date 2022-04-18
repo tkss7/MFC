@@ -63,6 +63,7 @@ void CHomeWorkView::OnDraw(CDC* pDC)
 	for (const CDrawLine& line : pDoc->m_lines) {
 		line.DrawAll(pDC);
 	}
+
 }
 
 

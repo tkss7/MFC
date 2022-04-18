@@ -203,6 +203,9 @@ void CHomeWorkDoc::OnUpdateIndicatorColor(CCmdUI* pCmdUI)
 	case RGB(0,255, 0):
 		pCmdUI->SetText(_T("초록색"));
 		break;
+	case RGB(0,0,255):
+		pCmdUI->SetText(_T("파란색"));
+		break;
 	default:
 		pCmdUI->SetText(_T(""));
 		break;

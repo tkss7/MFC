@@ -1,0 +1,252 @@
+arr.reserve(100) 미리 메모리 할당 곧 늘어날 예정이라고 100개 할당
+
+reserve랑 resize랑은 같이 써야 이뻐
+
+
+컨트롤 윈도우=====================================================================================
+
+■static 윈도우 - 화면에 고정된 문자열을 출력한 것
+
+  방법
+	①cwnd 이용 : 이용잘안해 범위가 너무 커져
+
+	ex) m_wndStatic1.Create(_T("STATIC"), _T("제목"),
+		WS_CHILD | WS_VISIBLE, CRect(100, 100, 200, 150), this, 1234);
+
+	 -> cwnd = 클래스 명, 제목, 너는 자식이야 라고  child 꼭 잇어야함, visible은 보여라 이다.
+	    기본이기 때문에 child인지 아닌지 설정해줘야 한다
+
+	②static : 이용 뷰에 선언 하고 oncreate
+
+	ex) m_wndStatic2.Create(_T("제복"),WS_VISIBLE, CRect(100, 100, 200, 150), this, 1236); 
+	
+	-> WS_CHILD가 기본적으로 들어가 잇다
+	-> WS_VISIBLE | SS_CENTER 이렇게 하면 글이 가운데에 온다
+	-> WS_VISIBLE |SS_ICON | SS_CENTERIMAGE 이렇게 아이콘을 불러올수 있지만 이럴때 글은 출력되지 않는다
+	-> m_wndStatic2.SetIcon(AfxGetApp()->LoadIcon(IDR_MAINFRAME)) 으로 아이콘을 불러와야 아이콘 출력
+
+
+	-> CString strText;
+	    m_wndStatic2.GetWindowText(strText);  : 이걸로 텍스트 내용물을 바꿀수 있다
+    
+   아이디를 이용한 윈도우 객체 포인터 얻는 방법 
+	①  onlbuttondown에서 한다
+	     CWnd* pWnd = GetDlgItem(1236);  : 아이디를 이용해서 타이틀을 바꿀수 있다
+	     pWnd->SetWindowTextW(_T("왼쪽 마우스 버튼 클릭"));
+	②  onlbuttondown에서 한다
+	     SetDlgItemText(1236, _T("왼쪽 마우스 버튼 클릭"));  : 위에 방법과 동일하나 한번에 한거
+
+
+■ edit
+
+ 방법 -> static과 비슷동일
+	①cwnd 이용 : 이용잘안해 범위가 너무 커져
+
+	ex) m_wndEdit1.Create(_T("EDIT"),_T("안녕"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_BORDER | ES_AUTOHSCROLL,
+		CRect(20, 20, 220, 36), this, 1234);
+
+	 -> cwnd = 클래스 명, 제목, 너는 자식이야 라고  child 꼭 잇어야함, visible은 보여라 이다.
+	    기본이기 때문에 child인지 아닌지 설정해줘야 한다
+
+	②static : 이용 뷰에 선언 하고 oncreate
+
+	ex) m_wndEdit2.Create(WS_VISIBLE | WS_TABSTOP | WS_BORDER | ES_AUTOHSCROLL | ES_MULTILINE,
+		CRect(20, 50, 220, 76), this, 1235);
+	m_wndEdit2.SetWindowText(_T("메롱")); 
+	CString strText;
+	m_wndEdit2.GetWindowText(strText);
+
+	
+   아이디를 이용한 윈도우 객체 포인터 얻는 방법 
+	①  CString strText;
+	m_wndEdit2.GetWindowText(strText);
+
+	AfxMessageBox(strText);
+	MessageBox(strText, NULL, MB_ICONWARNING | MB_YESNO);
+	-> 메세지 박스 세번째 인자로 아이콘을 바꿀수 있다 , | 하고 확인 취소 버튼등을 바꿀수 있다
+
+
+
+대화상자 기반 응용 프로그램 =================================================================
+
+on create가 아닌 리소스를 이용하여 배치한다
+
+생성 방법 : mfc앱 -> 대화상자기반 -> 향상된 mfc 뭐시기 없음 
+
+m_pMainWnd = &dlg;   : AfxGetMainWnd() -> CLogonDemoDlg 객체를 얻는다
+
+dlg.DoModal(); 이 함수는 확인이나 취소 등의 버튼을 눌러야만 함수가 끝난다
+
+비밀번호 :(&P)   ->  &+키 를 하는거는 tap키 다음으로 이동하겠다 라는것으로 tap 오더 설정을 alt +P를 누르게 되면 Tap오더 뒤 순서인
+포커스가 이동한다
+
+ctrl + D -> 포커스 순서 조정, tap 오더 설정      ※tap키의 배치는 위에서 아래로 왼쪽에서 오른쪽으로 순서가 이동해야한다
+ctrl + T -> 대화상자 테스트
+
+
+static text 에서는 캡션에서 해당 내용 변경 가능
+edit control에서는 암호에 해당되는 부분 선택시 암호화되어 글자 표시됨
+
+
+
+
+확인 및 취소 선택후 이벤트 버튼을 선택하여 BN_ClICKED 에서 함수를 추가하여 클릭시 이벤트를 설정 할 수 있다.
+
+	ex) void CLogonDemo4Dlg::OnBnClickedOk(){
+	CString strID;
+	CString strPwd;
+	GetDlgItemText(IDC_EDIT1, strID);  // 변수에 잇는값을 화면에 출력해야 할때
+	GetDlgItemText(IDC_EDIT2, strPwd);
+	if (strID==_T("han")&&strPwd==_T("1234")){
+		CDialog::OnOK();
+	}
+	else {
+		MessageBox(_T("시발아"));
+	}
+	//CDialog::OnOK();
+	}
+
+
+
+BOOL CLogonDemo4Dlg::OnInitDialog()  ->  WM_INITDIALOG = WM_CREATE 랑 동일하여 여기다가 입력
+
+■지역변수 사용방법 : 잘 사용 ㄴ
+	SetDlgItemText : 출력할 값을 아이디와 매칭해서 출력(변수값을 화면에 출력)
+	  ex) SetDlgItemText(IDC_EDIT1, _T("아이디를 입력해주세요.")); 
+
+	GetDlgItemText : 값을 아이디와 매칭해서 읽어들이는 것
+  	ex) CString strID;
+       	GetDlgItemText(IDC_EDIT1, strID);
+
+■멤버변수선언 및 사용
+	다이어그램에서 edit text 선택 -> 우클릭 -> 변수추가 선택 -> 
+	값, 컨트롤 중 선택(컨트롤 은 윈도우 Cwnd  inable disable값은 기본타입이 Cstring이다) ->
+	-> 변수명, 최댓값 등을 선택하고  BOOL CLogonDemo4Dlg::OnInitDialog() 에서 하면된다.
+
+	설정완료시 : 헤더에는 CString m_strID; 선언이 되어있다.
+
+
+	ex)
+	① UpdateData();
+	    if (m_strID==_T("han")&&m_strPwd==_T("1234")){
+		MessageBox(_T("로그인성공"), _T("로그인성공"), MB_ICONEXCLAMATION | MB_OK);
+		CDialog::OnOK();
+	    }
+	    else {
+		MessageBox(_T("시발아"));
+	    }
+	② m_strID = _T("아이디를 입력해주세요.");
+	    UpdateData(FALSE);            -> false시 바로 출력
+
+
+
+
+
+link =======================================================================
+
+SysLink Control 의 캡션에서 설정
+<a href="https://www.naver.com">네이버</a>
+
+■SysLink Control 의 이동 함수
+
+	ex) void CLogonDemo4Dlg::OnNMClickSyslink1(NMHDR* pNMHDR, LRESULT* pResult){
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	UpdateData();
+	CString strUrl;
+	m_linkCtrl.GetItemUrl(0, strUrl);
+
+	::ShellExecute(NULL, _T("open"), strUrl,NULL,NULL,SW_SHOW);
+
+	*pResult = 0;
+	}
+
+
+button =====================================================================
+기본단추 -> true 는 하나만 있어야 한다
+
+
+■주소를 입력받을 edit 멤버변수의 함수처리
+
+	ex) void CLogonDemo4Dlg::OnBnClickedButton1(){
+	UpdateData();
+	if (m_strLinkaddress.IsEmpty()) {
+		MessageBox(_T("주소를 입력해주세요."));
+		return;
+	}
+	::ShellExecute(NULL, _T("open"), m_strLinkaddress,NULL,NULL,SW_SHOW);//새로운 브라우저 실행
+	}
+
+
+check box(매우매우 중요) ==============================================================
+ 변수 추가시 -> 값은 참거짓 밖에 없다, 컨트롤은 그대로
+
+
+
+void CButtonDemoDlg::OnBnClickedCheckAuto()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	UpdateData(); //데이터가 읽힌다 - 여기 있는 상태값들이 변수로 온다
+
+
+■ 함수를 이용한 체크박스 활성화,비활성화
+
+	① if 함수의 활용(멤버변수)
+	//if (m_bAuto ){
+	//	CWnd* pWnd = GetDlgItem(IDC_CHECK_UPDATE);
+	//	if (pWnd != nullptr) {
+	//		pWnd->EnableWindow(FALSE); //비활성화
+	//	}
+	//}
+	//else {
+	//	CWnd* pWnd = GetDlgItem(IDC_CHECK_UPDATE);
+	//	if (pWnd != nullptr) {
+	//		pWnd->EnableWindow(TRUE); //비활성화
+	//	}
+	//}
+
+	② if 함수의 활용(단축버전 / 멤버변수)
+	/*CWnd* pWndUpdate = GetDlgItem(IDC_CHECK_UPDATE);
+	if (pWndUpdate != nullptr){
+		pWndUpdate->EnableWindow(!m_bAuto);
+	}
+	CWnd* pWndSystem = GetDlgItem(IDC_CHECK_SYSTEM);
+	if (pWndSystem != nullptr) {
+		pWndSystem->EnableWindow(!m_bAuto);
+	}*/
+
+	③ 컨트롤 변수로의 활용
+	m_wndUpdate.EnableWindow(!m_bAuto);
+	m_wndSystem.EnableWindow(!m_bAuto);   //컨트롤 변수로 생성시 가능
+
+	ⓐ공통
+	m_bUpdate = m_bAuto;
+	m_bSystem = m_bAuto;
+
+	UpdateData(FALSE);
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

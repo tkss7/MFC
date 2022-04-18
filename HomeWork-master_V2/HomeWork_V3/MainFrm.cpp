@@ -5,7 +5,7 @@
 #include "pch.h"
 #include "framework.h"
 #include "HomeWork.h"
-
+#include"HomeWorkDoc.h"
 #include "MainFrm.h"
 
 #ifdef _DEBUG
@@ -18,6 +18,8 @@ IMPLEMENT_DYNCREATE(CMainFrame, CFrameWnd)
 
 BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_WM_CREATE()
+//	ON_COMMAND(IDM_COLO_RED, &CMainFrame::OnColoRed)
+ON_COMMAND(IDM_COLOR_RED, &CMainFrame::OnColorRed)
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -65,6 +67,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	DockControlBar(&m_wndToolBar);
 
 
+
 	return 0;
 }
 
@@ -95,3 +98,14 @@ void CMainFrame::Dump(CDumpContext& dc) const
 
 // CMainFrame 메시지 처리기
 
+
+
+
+
+
+void CMainFrame::OnColorRed()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CHomeWorkDoc* pDoc = (CHomeWorkDoc*)GetActiveDocument();
+	pDoc->m_line.m_penColor = RGB(255, 0, 0);
+}

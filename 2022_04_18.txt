@@ -1,0 +1,84 @@
+파일 입출력시 벡터는 연속된 메모리 이므로 시작주소만 알면 전체데이터를 한번에 Write 가능하다.
+벡터사이즈가 10일때 벡터에 데이터를 다 넣으면 사이즈가 20으로 늘어나면서 시작주소 또한 달라진다.
+비어있는 벡터의 케페시티는 1임, 여기서 2개를 넣으려하면 배열의 사이즈를 2배로 늘림 .. 이런식으로 늘려감
+-> 사전에 리사이즈로 배열의 크기를 크게 확장해 두는게 좋다.
+vector.reserve(배열 크기)
+vector.resize(배열 크기)
+
+list는  링크드 리스트 형태이므로 벡터처럼은 불가능하다.
+
+고정된 윈도우로 화면에 텍스트로 출력하는거 = Static
+책 380p에 이외의 세부 설정 값을이 나와있음
+
+===============CWnd 로 선언했을 때 설정 ==================================
+CWnd = 일반화로 쓰인 것임
+CStatic : 윈도우 명
+WS_CHILD | WS_VISIBLE == 필수 설정값
+WS_CHILD : 부모자식 중 자식이라는 것을 알리는것
+WS_VISIBLE : 화면에 보여라 == m_wndStatic1.ShowWindow(SH_SHOW); 이걸 쓰는거랑 같음
+사각형 크기
+this
+ID
+===================================================================
+=================CStatic 으로 선언했을 때 설정=============================
+Static이 자식이므로 WS_CHILD를 안써도 된다.
+WS_VISIBLE == 필수 설정값
+사각형 크기
+this
+ID
+
+SetWindowText(_T("")); 런타임 중 텍스트 설정
+
+GetWindowText(_T(""));
+=======================================================================
+======== ID값 읽어와서 메시지 변경=================
+CWnd* pWnd = GetDlgItem(1235);
+pWnd->SetWindowText(_T("왼쪽 마우스버튼 클릭")); 
+
+	or
+
+SetDlgItemText(1235, _T("왼쪽 마우스버튼 클릭"));
+=========================================================================
+
+WS_TABSTOP : 탭을 받으면 해당 위치로 오라
+
+AfxMessageBox(strText);
+MessageBox(strText,NULL, MB_ICONERROR | MB_YESNOCALCEL);
+
+ AfxGetMainWnd() -> CLogonDemoDlg의 객체를 얻는다.
+
+Doc/View 구조에서는 InitInstance 에서 true를 반환
+Dailog 구조에서는 InitInstance에서 false를 반환
+
+OnOk()를DoModal 값이 반환(호출하면) IDOK가 반환된다?
+
+Ctrl + D 누르면 순서 정하기(배치하기) 가능 : TAB 오더 정하기
+위 -> 아래, 왼 -> 오른쪽으로 가야함
+Ctrl + T
+Alt + I ??
+
+다이얼로그의 버튼 = 이벤트 
+이벤트의 click 의 OnOK(), OnCancel이 있어야 종료가 가능하다.
+
+다이얼로그 : WM_INITDIALOG 메시지가 초기화
+SetDlgItemText()를 사용하여 초기값 지정 가능
+
+DoDataExchange()
+UpdateData(True/False); true면 데이터 읽음, false면 데이터 출력
+
+
+컨트롤 = 윈도우 ex) CStatic == 화면에 인에이블, 디스에이블 할때 사용한다.
+값 = ex) CString(변수)
+
+App는 부모클래스 중에 CWnd가 없어서 메시지박스를 사용할 수 없다. 사용하려면 AfxMessageBox라는 전역함수를 사용해야 한다.
+유니코드에는 한문자 뒤에 \0가 있다 == 이래야 2바이트이므로
+
+399 페이지
+
+::ShellExecute(NULL, _T("open"), m_strLinkAddress, NULL, NULL, SW_SHOW); ==> 새로운 브라우저 실행 하는 함수
+
+메시지맵에서 OnNotify는 인자가 3개다,  메시지, 아이디 , 실행할 함수
+
+버튼 기본단추 : 디폴트 값으로 엔터 누르면 실행되게끔 하는 버튼
+
+윈도우에 관한 제어를 할 때는 값 보단 컨트롤이 좋다
