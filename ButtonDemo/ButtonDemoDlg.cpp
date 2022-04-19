@@ -55,6 +55,8 @@ CButtonDemoDlg::CButtonDemoDlg(CWnd* pParent /*=nullptr*/)
 	, m_bAuto(FALSE)
 	, m_bUpdate(FALSE)
 	, m_bSystem(FALSE)
+	, m_nOpType(2)
+	, m_nChild(0)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -67,6 +69,8 @@ void CButtonDemoDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Check(pDX, IDC_CHECK_SYSTEM, m_bSystem);
 	DDX_Control(pDX, IDC_CHECK_UPDATE, m_wndUpdate);
 	DDX_Control(pDX, IDC_CHECK_SYSTEM, m_wndSystem);
+	DDX_Radio(pDX, IDC_RADIO1, m_nOpType);
+	DDX_Radio(pDX, IDC_RADIO4, m_nChild);
 }
 
 BEGIN_MESSAGE_MAP(CButtonDemoDlg, CDialog)
@@ -75,6 +79,8 @@ BEGIN_MESSAGE_MAP(CButtonDemoDlg, CDialog)
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_CHECK_AUTO, &CButtonDemoDlg::OnBnClickedCheckAuto)
 	ON_BN_CLICKED(IDC_CHECK_SYSTEM, &CButtonDemoDlg::OnBnClickedCheckSystem)
+
+
 END_MESSAGE_MAP()
 
 
@@ -200,5 +206,9 @@ void CButtonDemoDlg::OnBnClickedCheckAuto()
 	UpdateData(FALSE);
 	
 }
+
+
+
+
 
 

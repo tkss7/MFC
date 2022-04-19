@@ -39,4 +39,8 @@ public:
 	CButton m_wndUpdate;
 	CButton m_wndSystem;
 	afx_msg void OnBnClickedCheckSystem();
+
+	int m_nOpType;
+
+	int m_nChild;
 };

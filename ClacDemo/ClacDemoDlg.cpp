@@ -191,10 +191,10 @@ HCURSOR CClacDemoDlg::OnQueryDragIcon()
 void CClacDemoDlg::OnBnClickedButton1()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	CString str;
 	UpdateData();
-	GetDlgItemText(IDC_EDIT1, str);
-	SetDlgItemText(IDC_EDIT1, str + _T("1"));
+	
+	m_Result += _T("1");
+	UpdateData(FALSE);
 
 }
 

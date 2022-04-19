@@ -1,0 +1,31 @@
+#include <memory>
+{
+shared_ptr<CMember> pMember = make_shared<Cmember>();
+}// 소멸자 호출됨
+
+ 스마트 포인터 : vector<shared_ptr<CMember>> // 메모리를 내가 직접 해제할 필요가 없다.
+
+using CMemberPtr = vector<shared_ptr<CMember>>
+
+framework.h = 변경되지 않는 헤더파일 선언해주면 됨 = 여기다 선언하면 다른 모든 cpp에서 사용가능하다.
+
+shift + rlt
+
+it =m_array.cbegin();  it != m_array.end();
+cbegin() : 상수로서 안쪽 데이터를 변경할 수 있다. 비교할 땐 가능한 cend로 한다.
+begin() : 값을 변경 할 수 있다.
+
+함수를 쓸 땐 선언 후 구현을 해야한다.
+람다는 선언을 안하고 바로 구현을 한다.
+
+auto add_function = [ 객체의 생성자 함수로 인해 전달되는 인자 ](int a, int b) - > int { return a + b; };
+캡쳐구문 : 데이터를 비교하기 위한 초기데이터
+result = add_fuction(10, 20);
+
+find_if(시작, 끝)
+
+데이터가 10만건 이상일땐 find_if로 찾는게 훨씬 더 빠르다. == 람다구문이 들어간다 == 람다 알아둬라
+
+GetBuffer() = 리턴하는게 문자열
+// 문자열의 
+C++의 CString과 C와 연동할 때 쓰는 함수래
