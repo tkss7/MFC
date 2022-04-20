@@ -49,6 +49,7 @@ END_MESSAGE_MAP()
 
 CComboExDemoDlg::CComboExDemoDlg(CWnd* pParent /*=NULL*/)
 	: CDialog(CComboExDemoDlg::IDD, pParent)
+	, m_strInput(_T(""))
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -57,6 +58,7 @@ void CComboExDemoDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_COMBOBOXEX1, m_ComboEx);
+	DDX_Text(pDX, IDC_EDIT1, m_strInput);
 }
 
 BEGIN_MESSAGE_MAP(CComboExDemoDlg, CDialog)
@@ -108,21 +110,22 @@ BOOL CComboExDemoDlg::OnInitDialog()
 
 	//2. 아이템 추가
 	CString strTmp = _T("");
-	COMBOBOXEXITEM cbi;
-	::ZeroMemory(&cbi, sizeof(cbi));
+	COMBOBOXEXITEM cbi = { 0 };
+	//::ZeroMemory(&cbi, sizeof(cbi));
 
-	cbi.mask = CBEIF_IMAGE | CBEIF_SELECTEDIMAGE | CBEIF_TEXT;
+	cbi.mask = CBEIF_IMAGE | CBEIF_SELECTEDIMAGE | CBEIF_TEXT; // 구조체 필드 중에 이 세가지만사용하겠다
 	for(int i = 0; i < 7; ++i)
 	{
 		strTmp.Format(_T("%dth Item"), i);
 
 		cbi.iItem			= i;
 		cbi.iImage			= i;
-		cbi.iSelectedImage	= i;
+		cbi.iSelectedImage	= i; //자기가 갖고 있던 이미지가 나온다
 
-		cbi.pszText			= (LPWSTR)(LPCTSTR)strTmp;
+		//cbi.pszText			= (LPWSTR)(LPCTSTR)strTmp;//출력할 문자열 전달
+		cbi.pszText			= strTmp.GetBuffer();// 이게 더 편하다
 
-		m_ComboEx.InsertItem(&cbi);
+		m_ComboEx.InsertItem(&cbi); // 삽입 콤보박스EX 구조체에 필요한 데이터를 다 집어넣고 사용한다.
 	}
 
 	m_ComboEx.SetCurSel(0);

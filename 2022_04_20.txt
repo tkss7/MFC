@@ -1,0 +1,82 @@
+문자열 입력후 엔터 눌러서 입력하고 싶다? == Insert String 버튼의 속성에 기본단추 활성화 
+Insert String = 마지막에 추가 ex) a , c가 입력되어 있고 b 를 Add 하면 a ,c, b  가 된다.
+Add String = 내림차순 정렬하면서 추가 ex) a , c가 입력되어 있고 b 를 Add 하면 a, b ,c 가 된다.
+
+
+FindString(-1, m_strInput) == -1 이후부터, 즉 0번째부터 m_strInput을 찾으시오
+LB_ERR = -1
+
+SetCurSel(nFindIndex); // 셋 커런트 셀렉트 = 찾은것에 선택된 표시함
+
+스태틱 텍스트의 아이디가 IDC_STATIC 면 안됨 => Static으로만 쓰겠다는 의미 => 이름을 바꿔야 값(변수)로 사용 가능하다.
+
+SelectString  = FindString 과 SetCurSel 의 합친 버전
+
+리스트박스 = 속성 => 선택 => Extend == 여러개 선택
+
+콤보박스 = 에딧 텍스트 + 리스트박스 
+
+리스트박스 여러개 지울 때 역순으로 지우는방법 : 정방향으로 지우면 하나 지울때 원소들이 한칸씩 땡겨오기 때문에
+인덱스가 바뀌어버린다. == 
+
+싱글 모드 = 처음부터 펼쳐져 있음 = 커서 이동 가능?
+드롭다운 모드 = 누르면 펼쳐짐 => 입력상자 부분을 내가 편집 할 수 있다.
+드롭리스트 모드 = 에딧부분이 회색이 되어버림 = 입력상자 부분을 내가편집할 수 없다.
+
+콤보박스 문자열 초기화
+m_ComboBox.SetEditSel(0,-1); //콤보박스 에딧 텍스트 안의 모든 문자를 선택
+m_comboBox.clear(); //선택된 만큼 지운다
+
+m_comboBox.GetLBText(nCurSel, m_strInput); // 리스트박스의 텍스트를 가져온다.
+
+C
+
+콤보박스 EXITEM 이라는 구조체를 사용해서 더해야 한다.
+
+
+
+	CString strTmp = _T("");
+	COMBOBOXEXITEM cbi = { 0 };
+	//::ZeroMemory(&cbi, sizeof(cbi));
+
+	cbi.mask = CBEIF_IMAGE | CBEIF_SELECTEDIMAGE | CBEIF_TEXT; // 구조체 필드 중에 이 세가지만사용하겠다
+	for(int i = 0; i < 7; ++i)
+	{
+		strTmp.Format(_T("%dth Item"), i);
+
+		cbi.iItem			= i;
+		cbi.iImage			= i;
+		cbi.iSelectedImage	= i; //자기가 갖고 있던 이미지가 나온다
+
+		//cbi.pszText			= (LPWSTR)(LPCTSTR)strTmp;//출력할 문자열 전달
+		cbi.pszText			= strTmp.GetBuffer();// 이게 더 편하다
+
+		m_ComboEx.InsertItem(&cbi); // 삽입 콤보박스EX 구조체에 필요한 데이터를 다 집어넣고 사용한다.
+	}
+
+
+cbi.iItem = i
+m_ComboEx.GetItem(&cbi) ;  // i번째 정보를 읽을 것이라 말해 두고 GetItem으로 콤보박스의 정보를 읽는다?????
+ // 해당 위치를 반환 = 해당위치의 정보들을 읽어 설정된 마스크 값에 해당하는 것을 변수에 저장한다( 설정된 마스크에 해당하는
+값들만 읽혀진다)
+
+
+m_progressCtrl.GetPos(); = 현재 게이지값이 나옴
+m_progressCtrl.SetRange(0, 100); // 범위설정
+m_progressCtrl.SetPos() = 현재 위치설정
+
+슬라이더 컨트롤은 방향이 있다 = 가로형 , 세로형 둘다 조절해서 만들 수 있다.
+
+윈도우 메시지 중에 ing로 끝나는것 , -ed로 끝나는 것이 있다.
+ing = 이벤트가 완료된 것이 아니다 = 아직 화면에 반영이 안된 상태의 위치 포인터 = 싱크가 맞지 않는다.
+반영안된 메시지 정보는 NMHDR* pNMHDR 변수에 들어 있다 ( 헤더 정보, dwPos = 실시간 좌표값)
+pNMTPC->dwPos
+
+
+슬라이더 컨트롤을 값으로 변수추가 하면 위치값을 int로 얻겠다는 의미임
+게이지의 범위를 설정하려면 컨트롤형 변수를 또 추가해야 한다. = 범위 설정 해야함 ex) ( 0 ~ 100 )
+m_sliderCtrl.SetTicFreq(2); // 2단계식 증가한다. ( 한번에 증가하는 양을 설정)
+속성 -> 자동 눈금 True 하면 눈금이 생김
+썸 포스 체인지 이벤트 를 설정하면 위치가 변동될때마다 이벤트가 발생하여 통지메시지가 발생한다.  == 속성 -> 이동 전 알림을 TRUE로 바꿔줘야 한다.
+속성 -> 이동 전 알림을 TRUE로 바꿔줘야 한다.
+

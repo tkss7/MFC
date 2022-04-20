@@ -35,4 +35,5 @@ public:
 	CImageList		m_ImgList;
 	//확장 콤보 박스
 	CComboBoxEx		m_ComboEx;
+	CString m_strInput;
 };

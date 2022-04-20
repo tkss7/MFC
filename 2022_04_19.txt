@@ -29,3 +29,6 @@ find_if(시작, 끝)
 GetBuffer() = 리턴하는게 문자열
 // 문자열의 
 C++의 CString과 C와 연동할 때 쓰는 함수래
+
+operator== 가 정의되어 있지 않다면 find_if를 써야 한다는 것을... 잊지말자!!!!
+

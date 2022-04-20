@@ -16,13 +16,11 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// Korean resources
+// 한국어(대한민국) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_KOR)
-#ifdef _WIN32
 LANGUAGE LANG_KOREAN, SUBLANG_DEFAULT
 #pragma code_page(949)
-#endif //_WIN32
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -72,6 +70,7 @@ END
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON                    "res\\ComboExDemo.ico"
 
+
 /////////////////////////////////////////////////////////////////////////////
 //
 // Dialog
@@ -88,16 +87,18 @@ BEGIN
     DEFPUSHBUTTON   "확인",IDOK,113,41,50,14,WS_GROUP
 END
 
-IDD_COMBOEXDEMO_DIALOG DIALOGEX 0, 0, 319, 108
+IDD_COMBOEXDEMO_DIALOG DIALOGEX 0, 0, 450, 212
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_APPWINDOW
 CAPTION "ComboExDemo"
 FONT 9, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
-    DEFPUSHBUTTON   "확인",IDOK,207,87,50,14
-    PUSHBUTTON      "취소",IDCANCEL,261,87,50,14
+    DEFPUSHBUTTON   "확인",IDOK,338,191,50,14
+    PUSHBUTTON      "취소",IDCANCEL,392,191,50,14
     CONTROL         "",IDC_COMBOBOXEX1,"ComboBoxEx32",CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP,57,31,155,54
     LTEXT           "Extended Combo box",IDC_STATIC,57,20,69,8
+    EDITTEXT        IDC_EDIT1,233,31,193,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Button2",IDC_BUTTON2,239,53,50,14
 END
 
 
@@ -146,7 +147,7 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO 
+GUIDELINES DESIGNINFO
 BEGIN
     IDD_ABOUTBOX, DIALOG
     BEGIN
@@ -159,9 +160,9 @@ BEGIN
     IDD_COMBOEXDEMO_DIALOG, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 312
+        RIGHTMARGIN, 443
         TOPMARGIN, 7
-        BOTTOMMARGIN, 101
+        BOTTOMMARGIN, 205
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -174,17 +175,29 @@ END
 
 IDB_Imagelist           BITMAP                  "res\\classview_hc.bmp"
 
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_COMBOEXDEMO_DIALOG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
 /////////////////////////////////////////////////////////////////////////////
 //
 // String Table
 //
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_ABOUTBOX            "ComboExDemo 정보(&A)..."
 END
 
-#endif    // Korean resources
+#endif    // 한국어(대한민국) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
