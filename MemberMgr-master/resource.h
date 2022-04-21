@@ -5,12 +5,17 @@
 #define IDM_ABOUTBOX                    0x0010
 #define IDD_ABOUTBOX                    100
 #define IDS_ABOUTBOX                    101
+#define IDD_MODALDEMO_FORM              101
 #define IDD_MEMBERMGR_DIALOG            102
 #define IDR_MAINFRAME                   128
 #define IDC_EDIT_ID                     1000
+#define IDC_LIST1                       1000
 #define IDC_EDIT_NAME                   1001
+#define IDC_BUTTON_INSERT               1001
 #define IDC_EDIT_POST_CODE              1002
+#define IDC_BUTTON_REVISE               1002
 #define IDC_EDIT_ADRESS                 1003
+#define IDC_BUTTON_DEL                  1003
 #define IDC_CHECK_MALE                  1004
 #define IDC_CHECK_FEMALE                1005
 #define IDC_EDIT_PHONE1                 1006
@@ -27,7 +32,6 @@
 #define IDC_BTN_FIND                    1016
 #define IDC_BTN_ADD                     1017
 #define IDC_BTN_REVISE                  1018
-#define IDC_BTN_REVISE2                 1019
 #define IDC_BTN_DEL                     1019
 
 // Next default values for new objects
