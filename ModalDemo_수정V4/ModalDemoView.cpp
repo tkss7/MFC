@@ -128,8 +128,10 @@ void CModalDemoView::OnBnClickedButtonInsert()
 	* 4. 생성된 CMember 객체를 Document에 추가한다
 	*/
 
-	CMemberMgrDlg dlg;
-	
+	//CMemberMgrDlg dlg; // 이대로면 최상위 부모인 CFrameWnd를 찾아감
+	CMemberMgrDlg dlg(this);
+
+
 	if (dlg.DoModal() == IDOK) {
 		//2. 입력된 값을 이용하여 Member 객체를 생성한다
 //		CMemberPtr pMember = dlg.GetMemberPtr();
@@ -137,10 +139,21 @@ void CModalDemoView::OnBnClickedButtonInsert()
 		//CModalDemoDoc* pDoc = GetDocument();
 		//pDoc->m_memberMgr.InsertMember(dlg.GetMemberPtr());
 		CMemberPtr pMember = dlg.GetMemberPtr();
-		GetDocument()->InsertMember(pMember);
+		if (GetDocument()->GetMember(pMember->m_strId) == nullptr)
+		{
+			GetDocument()->InsertMember(pMember);
+		}
+		else
+		{
+			AfxMessageBox(_T("중복 된 ID 입니다. 처음부터 다시 입력하세요!!!"));
+			return;
+		}
+		
 
 		m_listBox.AddString(pMember->m_strId.GetBuffer());
 	}
+
+
 }
 
 //cpp 클래스 -> 멤버 변수 

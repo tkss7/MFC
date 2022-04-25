@@ -29,6 +29,7 @@
 #define IDC_RADIO_HOBBY3                1012
 #define IDC_RADIO_HOBBY4                1013
 #define IDC_RADIO_HOBBY5                1014
+#define IDC_BUTTON1                     1015
 
 // Next default values for new objects
 // 
@@ -36,7 +37,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        313
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1005
+#define _APS_NEXT_CONTROL_VALUE         1016
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
 #endif

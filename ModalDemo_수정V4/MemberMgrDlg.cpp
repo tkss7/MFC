@@ -7,6 +7,7 @@
 #include "MemberMgrDlg.h"
 #include "afxdialogex.h"
 #include "resource.h"
+#include"MainFrm.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -15,8 +16,8 @@
 
 // CMemberMgrDlg 대화 상자
 
-CMemberMgrDlg::CMemberMgrDlg(CWnd* pParent /*=nullptr*/)
-	: CDialogEx(IDD_MEMBERMGR_DIALOG, pParent)
+CMemberMgrDlg::CMemberMgrDlg(CMemberMgr* pMemberMgr, CWnd* pParent /*=nullptr*/)
+	: CDialogEx(IDD_MEMBERMGR_DIALOG, pParent), m_pMemberMgr(pMemberMgr)
 	, m_strID(_T(""))
 	, m_strName(_T(""))
 	, m_nPostCode(0)
@@ -62,6 +63,8 @@ BEGIN_MESSAGE_MAP(CMemberMgrDlg, CDialogEx)
 	//ON_BN_CLICKED(IDC_BTN_UPDATE, &CMemberMgrDlg::OnBnClickedBtnUpdate)
 	//ON_BN_CLICKED(IDC_BTN_DELETE, &CMemberMgrDlg::OnBnClickedBtnDelete)
 	ON_BN_CLICKED(IDOK, &CMemberMgrDlg::OnBnClickedOk)
+//	ON_BN_CLICKED(IDC_BUTTON1, &CMemberMgrDlg::OnBnClickedButton1)
+ON_BN_CLICKED(IDC_BUTTON1, &CMemberMgrDlg::OnBnClickedButton1)
 END_MESSAGE_MAP()
 
 
@@ -376,3 +379,40 @@ bool CMemberMgrDlg::IsEmpty(const CString& strText, LPCTSTR lpszMsg, UINT id) co
 	return false;
 }
 
+
+
+
+
+void CMemberMgrDlg::OnBnClickedButton1()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+
+	//부모윈도우 얻기
+	//CWnd* pWnd = GetParent();  // FrameWnd 를 찾아감
+
+	//if (pWnd->IsKindOf(RUNTIME_CLASS(CFrameWnd))) {
+
+	//	CMainFrame* pMainFrame = (CMainFrame*)pWnd;
+	//	CMemberPtr pMember = GetMemberPtr();
+	//	if (((CModalDemoDoc*)pMainFrame->GetActiveDocument())->GetMember(pMember->m_strId) != nullptr) {
+	//		AfxMessageBox(_T("중복 된 ID 입니다. 처음부터 다시 입력하세요!!!"));
+	//		return;
+	//	}
+	//}
+	CWnd* pWndId = GetDlgItem(IDC_EDIT_ID);
+	if (pWndId != nullptr && pWndId->IsWindowEnabled()) {
+		//	if (GetDlgItem(123)->IsWindowEnabled()) {
+		//CMainFrame* pMainFrame = (CMainFrame*)AfxGetApp()->m_pMainWnd;
+		////CMainFrame* pMainFrame = (CMainFrame*)AfxGetMainWnd();
+		//CModalDemoDoc* pDoc = (CModalDemoDoc*)pMainFrame->GetActiveDocument();
+		//CMemberPtr pMember = pDoc->GetMember(m_strID);
+		
+		if (pMember != nullptr && !pMember->m_strId.IsEmpty()) {
+			AfxMessageBox(_T("아이디가 중복 되었습니다"));
+			return;
+		}
+	}
+	
+
+
+}

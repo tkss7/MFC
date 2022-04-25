@@ -43,4 +43,5 @@ public:
 	afx_msg void OnTRBNThumbPosChangingSlider1(NMHDR* pNMHDR, LRESULT* pResult);
 	CSpinButtonCtrl m_wndSpin;
 	afx_msg void OnEnChangeEdit1();
+	afx_msg void OnDeltaposSpin2(NMHDR* pNMHDR, LRESULT* pResult);
 };

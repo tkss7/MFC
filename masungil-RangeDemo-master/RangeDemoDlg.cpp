@@ -78,6 +78,7 @@ BEGIN_MESSAGE_MAP(CRangeDemoDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON2, &CRangeDemoDlg::OnBnClickedButton2)
 	ON_NOTIFY(TRBN_THUMBPOSCHANGING, IDC_SLIDER1, &CRangeDemoDlg::OnTRBNThumbPosChangingSlider1)
 	ON_EN_CHANGE(IDC_EDIT1, &CRangeDemoDlg::OnEnChangeEdit1)
+	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN2, &CRangeDemoDlg::OnDeltaposSpin2)
 END_MESSAGE_MAP()
 
 
@@ -280,3 +281,5 @@ void CRangeDemoDlg::OnEnChangeEdit1()
 	m_progressCtrl.SetPos(m_nEditPos);
 
 }
+
+

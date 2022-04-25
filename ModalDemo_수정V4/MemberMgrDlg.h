@@ -31,9 +31,10 @@ class CMemberMgrDlg : public CDialogEx
 {
 // 생성입니다.
 public:
-	CMemberMgrDlg(CWnd* pParent = nullptr);	// 표준 생성자입니다.
+	CMemberMgrDlg(CMemberMgr* pMemberMgr, CWnd* pParent = nullptr);	// 표준 생성자입니다.
 
 //	vector<CMemberPtr> m_array;
+	CMemberMgr* pMemberMgr;
 public:
 	CMemberPtr GetMemberPtr() {
 		CMemberPtr pMember = make_shared<CMember>();
@@ -114,4 +115,6 @@ public:
 	afx_msg void OnBnClickedBtnUpdate();
 	afx_msg void OnBnClickedBtnDelete();
 	afx_msg void OnBnClickedOk();
+//	afx_msg void OnBnClickedButton1();
+	afx_msg void OnBnClickedButton1();
 };

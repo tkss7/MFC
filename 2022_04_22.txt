@@ -1,0 +1,81 @@
+녹화중지  윈도우 + Alt + R
+
+IsWindowEnabled() : 윈도우가 활성화 중인지 여부를 반환
+
+pWndId == nullptr => 생성이 안되거나 해서 ID값을 못받아 올 경우
+포인터를 쓸 때 그포인터가 null인지아닌지 확인 후 진행하는게 보안상 더 안전한 코드다
+
+ 포인터 말고 참조자로 넘기고 선언하고 하면 포인터에 대한 위험성(null)에 대한 위험성이 사라진다.
+
+포인터의 단점 == 주소가 null일 경우가 있다 = 항상 이 경우를 고려해서 체크해주고 써야한다.
+
+참조자는 반드시 초기화가 되어야한다. 콜론에서
+
+포인터에 대해선 null 여부를 확인 후 호출되도록 코딩을 해야한다.
+참조자는 null일수가 없다. 객체가 반드시 있어야 하기 때문에
+
+포인터로 쓸 수 있는 곳은 가능하면 레퍼런스로 사용해라
+
+int InSertItem  (구조체)
+
+int InSertItem ( 위치, 문자열 )
+
+int InSertItem ( 위치, 문자열 , 이미지 인덱스)
+
+int InSertItem 의 오버라이딩 함수 종류가 3개정도 있다
+
+
+===Add함수====
+int Add(
+    CBitmap* pbmImage,
+    CBitmap* pbmMask);
+
+int Add(
+    CBitmap* pbmImage,
+    COLORREF crMask);
+
+int Add(HICON hIcon);
+==================
+
+루틴이 끝나도 안사라지는 방법
+1. Static 사용
+2. 멤버변수로 만든다 == 가져와서 헤더파일 선언부의 멤버변수로 만들면 된다
+
+아이콘 추가시 꼭 다 추가하고 RESOURSE.H 헤더에 가서 아이콘 숫자들이 1씩 증가하는지 꼭 확인하고 아니면 바꿔주자
+
+small icon 모드하면 LVSIL_
+
+
+외곽 ... = 포커스
+외곽... 이 없고 그냥 파란색 선택 = 셀렉트
+
+
+온 이닛다이얼로그에 이렇게 추가 or  콤보박스 데이터에 Icon;List 이런식으로입력 , 정렬 false, 형식 drop list
+
+	m_comboBox.InsertString(0, _T("Icon"));
+	m_comboBox.InsertString(1, _T("Small Icon"));
+	m_comboBox.InsertString(2, _T("List"));
+	m_comboBox.InsertString(3, _T("Report"));
+
+
+m_listCtrl.InsertColumn(1, _T("가격"), LVCFMT_RIGHT, 200); // 1 = 열,  200 = 컬럼의 폭,  LVCFMT_RIGHT = 오른쪽 정렬 
+
+리스트컨트롤의 레이블 편집 속성을 True로 주면 텍스트 편집이가능하다.
+선택하고 한번 더 누르거나 선택하고 F2키 누르면 편집됨
+
+텍스트편집 통지멤시지 = LVN_LABELEDIT
+
+m_listCtrl.LockWindowUpdate(); // 화면 변경을 막음
+m_listCtrl.UnlockWindowUpdate(); // 화면 변경 가능하게 함
+
+윈도우 무브
+셋 윈도우 포스
+LVCFMT : 리스트 뷰 컬럼 포맷
+
+GetBuffer() : 문자열에 관한 포인터를 얻은 것
+
+3장, 5, 6, 7, 8, 
+bitmapinfo 필수 == 영상처리 쪽
+비트맵 구조체
+
+데이터 처리 및 가공 관리 쪽은 비트맵 몰라두 된다
